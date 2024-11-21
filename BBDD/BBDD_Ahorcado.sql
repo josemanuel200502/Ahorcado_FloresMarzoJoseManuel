@@ -1,0 +1,36 @@
+CREATE DATABASE ahorcado;
+Use ahorcado;
+
+CREATE TABLE Tema(
+id_tema INT PRIMARY KEY AUTO_INCREMENT,
+nombre VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE Palabra(
+id_palabra INT PRIMARY KEY AUTO_INCREMENT,
+palabra VARCHAR(50) NOT NULL,
+id_tema INT,
+FOREIGN KEY (id_tema) REFERENCES Tema (id_tema)
+ON DELETE CASCADE ON UPDATE CASCADE
+
+);
+
+CREATE TABLE Jugador(
+id_jugador INT PRIMARY KEY AUTO_INCREMENT,
+nombre VARCHAR(50) NOT NULL,
+Victorias INT DEFAULT 0,
+Derrotas INT DEFAULT 0,
+Partidas_totales INT DEFAULT 0
+);
+
+CREATE TABLE Partida(
+id_partida INT PRIMARY KEY AUTO_INCREMENT,
+fecha DATE NOT NULL,
+resultado ENUM('ganado', 'perdido') NOT NULL,
+id_jugador INT,
+id_tema INT,
+id_palabra INT,
+FOREIGN KEY (id_jugador) REFERENCES Jugador(id_jugador) ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY (id_tema) REFERENCES Tema(id_tema) ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY (id_palabra) REFERENCES Palabra(id_palabra) ON DELETE CASCADE ON UPDATE CASCADE
+);
