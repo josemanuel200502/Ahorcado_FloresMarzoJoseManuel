@@ -49,21 +49,33 @@ def crear_tablas():
         )
     """)
 
-    #Insertar algunas palabras de los tres temas
-
-    cursor.execute('''
-    INSERT INTO Palabra(palabra,tema)VALUES
-    ('manzana','fruta'),
-    ('platano','fruta'),
-    ('naranja','fruta'),
-    ('sandia','fruta'),
-    ('python','concepto informático'),
-    ('algoritmo','concepto informático'),
-    ('variable','concepto informático'),
-    ('juan', 'nombre de persona'),
-    ('ana','nombre de persona'),
-    ('maria','nombre de persona')
-    ''')
+    # Verificar si ya existen palabras antes de insertarlas
+    cursor.execute("SELECT COUNT(*) FROM Palabra")
+    count = cursor.fetchone()[0]
+    if count == 0:
+        cursor.execute('''
+        INSERT INTO Palabra(palabra,tema)VALUES
+        ('manzana','fruta'),
+        ('platano','fruta'),
+        ('naranja','fruta'),
+        ('sandia','fruta'),
+        ('fresa','fruta'),
+        ('frambuesa','fruta'),
+        ('kiwi','fruta'),
+        ('melon','fruta'),
+        ('python','concepto informático'),
+        ('algoritmo','concepto informático'),
+        ('variable','concepto informático'),
+        ('java','concepto informático'),
+        ('Array','concepto informático'),
+        ('html','concepto informático'),
+        ('juan', 'nombre de persona'),
+        ('ana','nombre de persona'),
+        ('maria','nombre de persona'),
+        ('victor', 'nombre de persona'),
+        ('daniel','nombre de persona'),
+        ('rodrigo','nombre de persona')
+        ''')
 
     conexion.commit()
     cerrar_conexion(conexion)
